@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Teacher's Day!</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Falling Flowers & Sparkles Background Container -->
+  <div class="flower-container" id="flowerContainer"></div>
+
+  <!-- Ambient Glow Effects -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Main Container Card -->
+  <main class="card">
+    
+    <!-- BEFORE CLICK: Initial View (Header image + Button) -->
+    <div id="initial-view">
+      <!-- PHOTO 1: Header Banner Image -->
+      <div class="banner-box">
+        <img src="IMG_47d4786e-5015-4c59-9098-dfc7d04abab7.png" alt="Happy Teacher's Day Header" class="banner-img">
+      </div>
+
+      <!-- Title Bar -->
+      <div class="title-bar">
+        <h2>Teacher Appreciation Tribute 🌸</h2>
+      </div>
+
+      <p class="sub-text">We have prepared a special message for you!</p>
+      <button class="open-btn" onclick="revealMessage()">Click to Open Message 💌</button>
+    </div>
+
+    <!-- AFTER CLICK: Revealed Content (Hides initial view completely) -->
+    <div id="message-view" class="hidden">
+      
+      <!-- Title Bar inside revealed view -->
+      <div class="title-bar">
+        <h2>Happy Teacher's Month! 🌸</h2>
+      </div>
+
+      <!-- PHOTO 2: Class & Teacher Photo -->
+      <div class="photo-container">
+        <img src="received_909007112081470.jpeg" alt="Class Photo with Teacher" class="group-img">
+      </div>
+
+      <!-- Written Tribute Message -->
+      <div class="message-box">
+        <p>
+          Thank you for your endless dedication, guidance, and patience. You inspire us every day to learn,grow, and reach our full potential. Happy Teacher's Month Ma'am Mari!
+        </p>
+      </div>
+
+      <!-- Background Audio Player -->
+      <audio id="bgMusic" loop>
+        <source src="1790597223286.mp3" type="audio/mpeg">
+      </audio>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Reveal message, hide initial view (including header image), and play music
+    function revealMessage() {
+      document.getElementById('initial-view').style.display = 'none';
+      
+      const messageView = document.getElementById('message-view');
+      messageView.classList.remove('hidden');
+      
+      const music = document.getElementById('bgMusic');
+      music.play();
+    }
+
+    // Dynamic Falling & Sparkling Elements
+    const flowerContainer = document.getElementById('flowerContainer');
+    const items = ['🌸', '🌺', '✨', '💖', '💜', '⭐'];
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('falling-item');
+      
+      // Randomly select an emoji
+      particle.innerText = items[Math.floor(Math.random() * items.length)];
+      
+      // Randomize position, size, and timing
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.fontSize = (Math.random() * 14 + 16) + 'px';
+      
+      const fallDuration = (Math.random() * 3 + 4);
+      particle.style.animationDuration = `${fallDuration}s, 1.2s`; // Fall speed & sparkle speed
+
+      flowerContainer.appendChild(particle);
+
+      // Clean up DOM after falling
+      setTimeout(() => {
+        particle.remove();
+      }, fallDuration * 1000);
+    }
+
+    // Spawn a new falling item every 250ms
+    setInterval(createParticle, 250);
+  </script>
+
+</body>
+</html>
